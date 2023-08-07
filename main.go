@@ -28,7 +28,6 @@ func main() {
 
 	e.Renderer = app.appTemplates
 
-	e.Static("/static", "../htmx/src")
 	e.GET("/", app.Init)
 	e.POST("/run", app.RunQuery)
 	e.POST("/cancel", app.CancelQuery)
@@ -73,6 +72,7 @@ func (a *App) RunQuery(c echo.Context) error {
 		a.state.Sql = q.Sql
 		a.state.Error = "unable to parse request"
 	} else {
+		a.state.DB = q.DB
 		q.Run(context.Background())
 	}
 
@@ -163,6 +163,7 @@ func HtmxMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 }
 
 type State struct {
+	DB      string   `form:"db"`
 	Sql     string   `json:"sql" form:"sql"`
 	Error   string   `json:"error" form:"error"`
 	Queries []*Query `json:"queries" form:"queries"`

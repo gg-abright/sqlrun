@@ -58,6 +58,7 @@ func (q *Query) Run(ctx context.Context) error {
 		q.Duration = time.Now().Sub(q.Started)
 
 		cols, _ := rows.Columns()
+
 		result := []map[string]interface{}{}
 		for rows.Next() {
 			// Create a slice of interface{}'s to represent each column,
@@ -84,6 +85,7 @@ func (q *Query) Run(ctx context.Context) error {
 
 		if len(result) > 0 {
 			q.Results = fmt.Sprintf("Rows returned: %d, first record: %v", len(result), result[0])
+			fmt.Println(result[0])
 		} else {
 			q.Results = "Rows returned: 0"
 		}
