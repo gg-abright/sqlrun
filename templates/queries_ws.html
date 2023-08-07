@@ -12,6 +12,8 @@
             {{ end }}
             {{ if (eq .Status "running") }}
                 <li><button hx-post="/cancel?id={{.ID}}" hx-trigger="click">Cancel</button></li>
+            {{ else if (eq .Status "success") }}
+                <li>{{.Results}}</li>
             {{ end }}
         </ul>
     </li>

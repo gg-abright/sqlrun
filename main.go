@@ -117,9 +117,11 @@ func (a *App) QueriesUpdater(c echo.Context) error {
 			now := <-ticker.C
 
 			for i, q := range a.state.Queries {
+				q.Lock()
 				if q.Status == Running {
 					a.state.Queries[i].Duration = now.Sub(q.Started)
 				}
+				q.Unlock()
 			}
 			// Write
 			err := a.appTemplates.templates.ExecuteTemplate(buf, "queries_ws.html", a.state)
