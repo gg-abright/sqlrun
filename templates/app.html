@@ -1,0 +1,8 @@
+<div id="app">
+    <form hx-post="/run" hx-target="#app" hx-trigger="submit" style="height: 20%;">
+        <div style="color: red;">{{.Error}}</div>
+        <input name="db" type="text" value="{{.Conn}}" placeholder="DSN" /><br>
+        <input name="sql" type="textarea" value="{{.Sql}}" placeholder="query" rows="5" cols="100" style="width: 50%; height: 20%" /><br>
+        <button type="submit">Run</button>
+    </form>
+</div>

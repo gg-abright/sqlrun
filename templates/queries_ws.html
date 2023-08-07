@@ -1,0 +1,19 @@
+<ol id="queries">
+    {{range .Queries}}
+    <li>
+        ---
+        <ul>
+            <li>DSN: {{.DB}}</li>
+            <li>Query: {{.Sql}}</li>
+            <li>Status: {{.Status}}</li>
+            <li>Time: {{.Duration}}</li>
+            {{ if (ne .Error nil) }}
+            <li>Error: {{.Error}}</li>
+            {{ end }}
+            {{ if (eq .Status "running") }}
+                <li><button hx-post="/cancel?id={{.ID}}" hx-trigger="click">Cancel</button></li>
+            {{ end }}
+        </ul>
+    </li>
+    {{end}}
+</ol>

@@ -1,0 +1,13 @@
+<ol id="queries" hx-get="/queries" hx-trigger="load delay:2s" hx-swap="outerHTML">
+    {{range .Queries}}
+    <li>
+        ---
+        <ul>
+            <li>{{.Sql}}</li>
+            <li>{{.Status}}</li>
+            <li>{{.Duration}}</li>
+            <li hx-post="/cancel?id={{.ID}}" hx-trigger="click"><button>Cancel</button></li>
+        </ul>
+    </li>
+    {{end}}
+</ol>

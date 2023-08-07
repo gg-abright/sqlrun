@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SQL Run</title>
+        
+        <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+    </head>
+    <body>
+        {{ template "app.html" }}
+        <div hx-ext="ws" ws-connect="/queries-update">
+            {{ template "queries_ws.html" }}
+        </div>
+    </body>
+</html>
